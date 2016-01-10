@@ -4,5 +4,3 @@ struck should go into this monitoring directory.
 
 This can then be automated and logged so that any suspicious activity can be
 immediately notified to LH.
-
-And then I edited the code to in GitHub.com
