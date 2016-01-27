@@ -30,6 +30,13 @@ SCRIPT=$(basename $0)
 # Run "Process Plesk Mail Logs" script
 sh $LOC/run.PROCESS_PLESK_MAIL_LOGS.sh
 
+# Convert all addresses to lower case
+rm -f $TMP/lower_case.temp
+while read ADDRESS; do
+	echo $ADDRESS | perl -ne 'print lc' >> $TMP/lower_case.temp
+done < $PROCESSED_SENDERS
+cat $TMP/lower_case.temp > $PROCESSED_SENDERS
+
 # Join the output of the "Process Plesk Mail Logs" script with the white list and then filter for associated domain names.
 join -v 1 $PROCESSED_SENDERS $WHITE_LIST > $TMP/UNKNOWN_ADDRESSES.temp
 #join -v 1 $PROCESSED_RECIPIENTS $WHITE_LIST >> $TMP/UNKNOWN_ADDRESSES.temp
